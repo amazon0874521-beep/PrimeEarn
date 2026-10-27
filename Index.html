@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080b09">
+<title>PrimeEarn | Wealth & Rewards</title>
+<style>
+:root{--black:#080b09;--panel:#111813;--panel2:#17221a;--green:#064e32;--green2:#0a6b43;--gold:#d9b45b;--white:#f5f5f0;--muted:#a2afa5;--border:#29362d;--red:#d65b5b}
+*{box-sizing:border-box;margin:0;padding:0}body{background:var(--black);color:var(--white);font-family:Arial,sans-serif;min-height:100vh}button,input{font:inherit}button{cursor:pointer}header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:17px 5%;background:#0d120e;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:10}.logo{font-size:23px;font-weight:900;letter-spacing:-1px}.logo span,h1 span,.gold{color:var(--gold)}.badge{color:var(--gold);border:1px solid #75602d;border-radius:20px;padding:7px 11px;font-size:11px}main{width:100%;max-width:1100px;margin:auto;padding:24px 18px 60px}.page{display:none}.page.active{display:block}.hero{background:radial-gradient(ellipse at top right,#17452c 0%,transparent 55%),linear-gradient(135deg,#111913,#080b09);border:1px solid var(--border);border-radius:20px;padding:35px 24px;margin-bottom:25px}.eyebrow{color:var(--gold);font-size:12px;font-weight:bold;letter-spacing:2px;margin-bottom:14px}h1{font-size:clamp(30px,7vw,49px);line-height:1.13;margin-bottom:16px}p{color:var(--muted);line-height:1.7}.hero p{max-width:550px;margin-bottom:23px}.btn{border:none;padding:13px 18px;border-radius:9px;font-weight:bold;margin:4px 3px 4px 0}.btn-gold{background:var(--gold);color:#171309}.btn-green{background:var(--green2);color:white}.btn-dark{background:#202a22;color:white;border:1px solid var(--border)}.btn-danger{background:#542323;color:white}.section-title{font-size:21px;margin:27px 0 16px}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}.card{background:var(--panel);border:1px solid var(--border);padding:20px;border-radius:14px;min-width:0}.card h3{font-size:15px;margin-bottom:12px}.card p{font-size:13px}.stat-value{font-size:25px;font-weight:800;margin:10px 0;overflow-wrap:anywhere}.icon{font-size:25px;margin-bottom:15px}.menu{display:flex;gap:9px;overflow-x:auto;padding:14px 0;margin-bottom:18px}.menu button{white-space:nowrap}.form-box{max-width:460px;margin:25px auto;padding:25px;background:var(--panel);border:1px solid var(--border);border-radius:16px}.form-box h2{margin-bottom:10px}.field{margin-top:17px}label{display:block;font-size:13px;margin-bottom:8px;color:#d0d8d1}input{width:100%;padding:13px;background:#080d09;color:white;border:1px solid var(--border);border-radius:8px;outline:none}input:focus{border-color:var(--gold)}.full{width:100%;margin-top:19px}.notice{background:#18251b;border-left:3px solid var(--gold);padding:14px;margin:17px 0;color:#d7dfd7;font-size:13px;line-height:1.6;border-radius:5px}.status{color:var(--gold);font-size:12px}.small{font-size:12px}.hidden{display:none!important}footer{text-align:center;border-top:1px solid var(--border);padding:28px 15px;color:var(--muted);font-size:12px;line-height:1.8}#message{display:none;margin:12px 0;padding:12px;border:1px solid var(--border);border-radius:8px;background:#18251b;color:var(--white);line-height:1.5}#message.show{display:block}.inline{display:inline-block}@media(max-width:700px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.hero{padding:27px 19px}.card{padding:15px}.stat-value{font-size:21px}}@media(max-width:380px){.grid{grid-template-columns:1fr}}
+</style>
+<!-- Supabase client library. The publishable key is designed for browser use; database RLS is still essential. -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+<header><div class="logo">PRIME<span>EARN</span></div><div class="badge">DEMO VERSION</div></header>
+<main>
+<div id="message" role="status" aria-live="polite"></div>
+<section id="home" class="page active"><div class="hero"><div class="eyebrow">WELCOME TO PRIMEEARN</div><h1>Your Future.<br>Your Goals.<br><span>Your Opportunity.</span></h1><p>Explore business opportunities, track your account and learn about eligible referral rewards in one convenient platform.</p><button class="btn btn-gold" onclick="showPage('register')">Create Account →</button><button class="btn btn-dark" onclick="showPage('login')">Sign In</button></div><h2 class="section-title">Explore PrimeEarn</h2><div class="grid"><div class="card"><div class="icon">💰</div><h3>Business Opportunities</h3><p>Learn about opportunities only when their terms, risks and legal requirements have been reviewed.</p></div><div class="card"><div class="icon">🎁</div><h3>Refer & Earn</h3><p>Referral tracking is a foundation feature. No rewards are payable in this prototype.</p></div><div class="card"><div class="icon">👛</div><h3>Demo Wallet</h3><p>View a simulated balance and account status. It is not real money.</p></div></div><div class="notice">Prototype only: no real investments, deposits, referral payments or withdrawals are processed. Do not send money based on this demo.</div></section>
+<section id="register" class="page"><div class="form-box"><h2>Create Your Account</h2><p>Register with your email address.</p><form id="registerForm"><div class="field"><label for="regName">Full name</label><input id="regName" required maxlength="80" autocomplete="name" placeholder="Enter your name"></div><div class="field"><label for="regEmail">Email address</label><input id="regEmail" type="email" required autocomplete="email" placeholder="you@example.com"></div><div class="field"><label for="regPassword">Password</label><input id="regPassword" type="password" required minlength="8" autocomplete="new-password" placeholder="At least 8 characters"></div><button class="btn btn-gold full" type="submit">Create Account</button></form><p class="small" style="margin-top:15px">Use a unique password. If email confirmation is enabled in Supabase, check your inbox to confirm your account.</p><button class="btn btn-dark" onclick="showPage('login')">Already registered? Sign in</button></div></section>
+<section id="login" class="page"><div class="form-box"><h2>User Login</h2><p>Sign in to your PrimeEarn account.</p><form id="loginForm"><div class="field"><label for="loginEmail">Email address</label><input id="loginEmail" type="email" required autocomplete="email"></div><div class="field"><label for="loginPassword">Password</label><input id="loginPassword" type="password" required autocomplete="current-password"></div><button class="btn btn-gold full" type="submit">Sign In</button></form><button class="btn btn-dark" onclick="showPage('register')">Create an account</button></div></section>
+<section id="dashboard" class="page"><div class="eyebrow">MEMBER AREA</div><h1>Welcome, <span id="userGreeting">Member</span></h1><p id="accountEmail">Your PrimeEarn account overview.</p><nav class="menu"><button class="btn btn-gold" onclick="showPage('dashboard')">Overview</button><button class="btn btn-dark" onclick="showPage('wallet')">Wallet</button><button class="btn btn-dark" onclick="showPage('investments')">Opportunities</button><button class="btn btn-dark" onclick="showPage('referrals')">Referrals</button></nav><div class="grid"><div class="card"><h3>Demo Wallet</h3><div class="stat-value gold">₦1,000</div><p>Simulated funds only</p></div><div class="card"><h3>Investment Balance</h3><div class="stat-value">₦0</div><p>No real investments</p></div><div class="card"><h3>Referral Rewards</h3><div class="stat-value">₦0</div><p>No rewards paid</p></div><div class="card"><h3>Your Referral Code</h3><div class="stat-value gold" id="dashReferralCode">Loading…</div><button class="btn btn-dark" onclick="copyReferral()">Copy Code</button></div></div><div class="notice">Your ₦1,000 starting balance is a fixed demo display only. It is not stored as cash, has no cash value and cannot be withdrawn.</div><button class="btn btn-dark" onclick="logoutUser()">Log Out</button></section>
+<section id="wallet" class="page"><h1>My <span>Wallet</span></h1><p>View your simulated PrimeEarn funds.</p><div class="card" style="margin-top:22px"><p>Available demo balance</p><div class="stat-value gold">₦1,000</div><p>Demo balance only — not real money.</p></div><div class="notice">Deposits and withdrawals are disabled. Do not transfer money to this prototype.</div><button class="btn btn-dark" onclick="showPage('dashboard')">Back to Dashboard</button></section>
+<section id="investments" class="page"><h1>Business <span>Opportunities</span></h1><p>Investment listings will only be added after the business model, risks, terms and relevant Nigerian legal/regulatory requirements have been reviewed.</p><div class="notice">No real-money investment purchases or returns are available in this prototype.</div><button class="btn btn-dark" onclick="showPage('dashboard')">Back to Dashboard</button></section>
+<section id="referrals" class="page"><h1>Refer & <span>Earn</span></h1><p>Referral tracking is being prepared.</p><div class="card" style="margin-top:20px"><h3>Your Referral Code</h3><div class="stat-value gold" id="referralPageCode">Loading…</div><button class="btn btn-gold" onclick="copyReferral()">Copy Referral Code</button></div><div class="notice">Referral rewards are not automatically payable. A production system must verify qualifying activities and apply published reward terms.</div><button class="btn btn-dark" onclick="showPage('dashboard')">Back to Dashboard</button></section>
+<section id="adminLogin" class="page"><div class="form-box"><div class="eyebrow">RESTRICTED AREA</div><h2>Super Admin</h2><p>Admin access is not enabled in this front-end file. It must be configured with server-side role checks before use.</p><div class="notice">Do not add an admin password to this HTML file. Browser-side passwords can be inspected and bypassed.</div><button class="btn btn-dark" onclick="showPage('home')">Back Home</button></div></section>
+</main><footer>PrimeEarn Prototype · Black, gold and dark green<br>Demo only. No real funds or financial transactions are handled.</footer>
+<script>
+// PrimeEarn Supabase connection settings. Publishable keys are browser-safe by design;
+// never put a secret/service-role key in this file. RLS must protect all database tables.
+const SUPABASE_URL = 'https://bsnlligcgtxmaebezrlc.supabase.co';
+const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_Zx6ZBfUvRpM4pVlb1q3tqg_KNxq-y89';
+let supabaseClient = null;
+let currentUser = null;
+const messageBox = document.getElementById('message');
+function showMessage(text){ messageBox.textContent=text; messageBox.classList.add('show'); window.scrollTo({top:0,behavior:'smooth'}); }
+function clearMessage(){ messageBox.textContent=''; messageBox.classList.remove('show'); }
+function showPage(id){ clearMessage(); document.querySelectorAll('.page').forEach(p=>p.classList.remove('active')); const page=document.getElementById(id); if(page) page.classList.add('active'); window.scrollTo({top:0,behavior:'smooth'}); }
+function requireLogin(){ if(!currentUser){showMessage('Please sign in to access your account.');showPage('login');return false;}return true; }
+async function loadProfile(){
+ if(!currentUser) return;
+ document.getElementById('accountEmail').textContent=currentUser.email || 'Signed in';
+ const {data,error}=await supabaseClient.from('profiles').select('full_name, referral_code').eq('id',currentUser.id).maybeSingle();
+ if(error){console.error(error);showMessage('You are signed in, but the profile could not be loaded. Check the database policies.');return;}
+ document.getElementById('userGreeting').textContent=(data && data.full_name) || currentUser.user_metadata?.full_name || 'Member';
+ const code=(data && data.referral_code) || 'Not available';
+ document.getElementById('dashReferralCode').textContent=code;
+ document.getElementById('referralPageCode').textContent=code;
+}
+async function registerUser(event){
+ event.preventDefault();clearMessage();
+ if(!supabaseClient){showMessage('Supabase did not load. Check your internet connection and reload this page.');return;}
+ const fullName=document.getElementById('regName').value.trim();
+ const email=document.getElementById('regEmail').value.trim();
+ const password=document.getElementById('regPassword').value;
+ if(fullName.length<2){showMessage('Please enter your full name.');return;}
+ const button=event.submitter; if(button){button.disabled=true;button.textContent='Creating account…';}
+ try{
+  const {data,error}=await supabaseClient.auth.signUp({email,password,options:{data:{full_name:fullName}}});
+  if(error) throw error;
+  if(data.session){currentUser=data.user;await loadProfile();showPage('dashboard');showMessage('Account created successfully. Your demo balance is simulated only.');}
+  else {showPage('login');showMessage('Registration submitted. Check your email for a confirmation link, then sign in.');}
+  document.getElementById('registerForm').reset();
+ }catch(err){showMessage(err.message || 'Registration failed. Please try again.');}
+ finally{if(button){button.disabled=false;button.textContent='Create Account';}}
+}
+async function loginUser(event){
+ event.preventDefault();clearMessage();
+ if(!supabaseClient){showMessage('Supabase did not load. Check your internet connection and reload this page.');return;}
+ const email=document.getElementById('loginEmail').value.trim();const password=document.getElementById('loginPassword').value;
+ const button=event.submitter;if(button){button.disabled=true;button.textContent='Signing in…';}
+ try{const {data,error}=await supabaseClient.auth.signInWithPassword({email,password});if(error)throw error;currentUser=data.user;await loadProfile();showPage('dashboard');showMessage('You are signed in. The displayed wallet balance is demo-only.');document.getElementById('loginForm').reset();}
+ catch(err){showMessage(err.message || 'Sign in failed. Check your email and password.');}
+ finally{if(button){button.disabled=false;button.textContent='Sign In';}}
+}
+async function logoutUser(){if(supabaseClient) await supabaseClient.auth.signOut();currentUser=null;showPage('home');showMessage('You have been signed out.');}
+async function copyReferral(){const code=document.getElementById('dashReferralCode').textContent;if(!code||code==='Loading…'||code==='Not available'){showMessage('Your referral code is not available yet.');return;}try{await navigator.clipboard.writeText(code);showMessage('Referral code copied.');}catch(e){showMessage('Your referral code is: '+code);}}
+(async function init(){
+ if(!window.supabase || !window.supabase.createClient){showMessage('Could not load the Supabase library. Check your internet connection and reload.');return;}
+ supabaseClient=window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);
+ const {data,error}=await supabaseClient.auth.getSession();
+ if(error){console.error(error);showMessage('Could not check your sign-in session.');return;}
+ currentUser=data.session?.user || null;
+ supabaseClient.auth.onAuthStateChange((_event,session)=>{currentUser=session?.user||null;});
+ if(currentUser){await loadProfile();showPage('dashboard');}
+})();
+document.getElementById('registerForm').addEventListener('submit',registerUser);
+document.getElementById('loginForm').addEventListener('submit',loginUser);
+</script>
+</body>
+</html>
